@@ -20,15 +20,15 @@
 
 #include <AsyncUDP_WT32_ETH01.h>
 
-IPAddress remoteIPAddress = IPAddress(192, 168, 2, 112);
+IPAddress remoteIPAddress = IPAddress(192, 168, 0, 112);
 
 #define UDP_REMOTE_PORT         5698
 
 /////////////////////////////////////////////
 
 // Select the IP address according to your local network
-IPAddress myIP(192, 168, 2, 232);
-IPAddress myGW(192, 168, 2, 1);
+IPAddress myIP(192, 168, 0, 232);
+IPAddress myGW(192, 168, 0, 58);
 IPAddress mySN(255, 255, 255, 0);
 
 // Google DNS Server IP
@@ -70,19 +70,24 @@ void setup()
   Serial.println(ASYNC_UDP_WT32_ETH01_VERSION);
 
   Serial.setDebugOutput(true);
+  Serial.println("OK");
 
   //bool begin(uint8_t phy_addr=ETH_PHY_ADDR, int power=ETH_PHY_POWER, int mdc=ETH_PHY_MDC, int mdio=ETH_PHY_MDIO,
   //           eth_phy_type_t type=ETH_PHY_TYPE, eth_clock_mode_t clk_mode=ETH_CLK_MODE);
   //ETH.begin(ETH_PHY_ADDR, ETH_PHY_POWER, ETH_PHY_MDC, ETH_PHY_MDIO, ETH_PHY_TYPE, ETH_CLK_MODE);
   ETH.begin(ETH_PHY_ADDR, ETH_PHY_POWER);
+  Serial.println("OK eth phy");
 
   // Static IP, leave without this line to get IP via DHCP
   //bool config(IPAddress local_ip, IPAddress gateway, IPAddress subnet, IPAddress dns1 = 0, IPAddress dns2 = 0);
   ETH.config(myIP, myGW, mySN, myDNS);
+  Serial.println("OK config");
 
   WT32_ETH01_onEvent();
+  Serial.println("OK event");
 
-  WT32_ETH01_waitForConnect();
+  // WT32_ETH01_waitForConnect();
+  Serial.println("OK wait");
 
   // Client address
   Serial.print("Async_UDPClient started @ IP address: ");
