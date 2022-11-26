@@ -20,7 +20,7 @@
 
 #include <AsyncUDP_WT32_ETH01.h>
 
-IPAddress remoteIPAddress = IPAddress(192, 168, 0, 112);
+IPAddress remoteIPAddress = IPAddress(192, 168, 0, 22);
 
 #define UDP_REMOTE_PORT         5698
 
